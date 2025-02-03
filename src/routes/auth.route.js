@@ -1,9 +1,14 @@
 import express from 'express'
-import { userSignup } from '../controllers/user.controller.js'
+import { protectRoute } from '../middelware/auth.middeleware.js'
 const router=express.Router()
+import { userSignup,userLogin ,getOne} from '../controllers/user.controller.js'
 
 
 router.post('/signup',userSignup)
+router.post('/login',userLogin)
+router.get('/get',getOne)
+
+
 
 
 export default router
