@@ -12,6 +12,7 @@ export const protectRoute=async(req,res,next)=>{
         return  res.status(400).json({message:"token not verify"})
     }
     req.user=decode
+  
     next();
     // res.status(200).json({message:"token verify"})
      

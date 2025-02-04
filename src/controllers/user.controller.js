@@ -6,7 +6,7 @@ import { generateToken } from "../lib/utils.js";
 export const userSignup=async(req,res)=>{
     try {
         const{name,email,password,role}= req.body;
-        
+        console.log("signup api call")
         if(!name || !email || !password){
             return res.status(400).json({message:"All fields required"})
         }
@@ -57,11 +57,11 @@ export const userLogin=async(req,res,next)=>{
             return res.status(200).json({message:"Password Not Match Try Again !"})
          }
        
-        generateToken(user._id,res)
+       const token= generateToken(user._id,res)
       
     
-      
-   return res.status(200).json({message:"User  Login Successfully"})
+        console.log("login api call")
+   return res.status(200).json({message:"User  Login Successfully",token})
 
     } catch (error) {
        return res.status(500).json({message:"server error in Login Route",error: error.message})
@@ -70,9 +70,9 @@ export const userLogin=async(req,res,next)=>{
 export const getOne=async(req,res,next)=>{
     try {
       
+     const user= req.user  ;
         
-        
-    
+      console.log('getAll api call',user)
       
    return res.status(200).json({message:"get route work"})
 

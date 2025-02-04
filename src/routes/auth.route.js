@@ -6,7 +6,7 @@ import { userSignup,userLogin ,getOne} from '../controllers/user.controller.js'
 
 router.post('/signup',userSignup)
 router.post('/login',userLogin)
-router.get('/get',getOne)
+router.get('/getAll',getOne)
 
 
 
