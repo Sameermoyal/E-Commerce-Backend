@@ -6,14 +6,18 @@ import { connectDB } from "./lib/db.js"
 import cookieParser from 'cookie-parser';
 import userAuthRoute from "./routes/auth.route.js"
 import customerRoute from "./routes/customer.route.js"
-
+import sellerRoute from "./routes/seller.route.js"
+import fileUpload from "express-fileupload";
 
 const app=express()
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
+app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
+
 app.use('/api/auth',userAuthRoute)
-app.use('/api/productList',customerRoute)
+app.use('/api/customerProducts',customerRoute)
+app.use('/api/seller',sellerRoute)
 app.use(cookieParser())
 app.listen(process.env.PORT,()=>console.log(`server running this port`,process.env.PORT))
 connectDB()

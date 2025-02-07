@@ -45,6 +45,7 @@ export const userLogin=async(req,res,next)=>{
         }
         
         const user=await userModel.findOne({email})
+        const role=user.role;
         if(!user){
             return res.status(400).json({message:"Not to be found please sign up"})
         } 
@@ -61,7 +62,7 @@ export const userLogin=async(req,res,next)=>{
       
     
         console.log("login api call")
-   return res.status(200).json({message:"User  Login Successfully",token})
+   return res.status(200).json({message:"User  Login Successfully",token,role})
 
     } catch (error) {
        return res.status(500).json({message:"server error in Login Route",error: error.message})
@@ -77,7 +78,7 @@ export const getOne=async(req,res,next)=>{
    return res.status(200).json({message:"get route work"})
 
     } catch (error) {
-       return res.status(500).json({message:"server error in Login Route",error: error.message})
+       return res.status(500).json({message:"server error in getOne Route",error: error.message})
     }
 }
 

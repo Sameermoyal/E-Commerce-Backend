@@ -11,6 +11,10 @@ const productSchema=new mongoose.Schema({
         type:String,
         required:true
     },
+    brand:{
+        type:String,
+        required:true
+    },
     desc:{
         type:String,
         required:true
@@ -22,7 +26,16 @@ const productSchema=new mongoose.Schema({
     rate:{
         type:String,
         required:true
-    }
+    },
+    quantity:{
+        type:String,
+        required:true
+    },
+    imageUrl:{
+        type:String,
+        required:true
+    },
+
 })
 
  const productModel=mongoose.model('Product',productSchema)
