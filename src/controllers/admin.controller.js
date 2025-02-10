@@ -48,3 +48,28 @@ export const getSeller = async (req, res) => {
         return res.status(500).json({ message: "Server error", error: error.message });
     }
 };
+export const blockUser = async (req, res) => {
+    try {
+        console.log("API Call : /blockUser in admin controller");
+
+        const { userId }=req.body;
+     
+      
+      if(!userId){
+        return res.status(400).json({message : "share user Id"})
+       }  
+
+        
+      const user=await userModel.findById(userId)
+      const userdata=await userModel.findByIdAndUpdate(userId,{userStatus:!user.userStatus},{new:true}).select("userStatus")
+ 
+   const{userStatus} =userdata
+   console.log("userStatus",userStatus)
+
+        return res.status(201).json({ message: "Product get successfully!" ,userStatus});
+
+    } catch (error) {
+        console.error("Error in get Seller data in admin controller:", error);
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+};

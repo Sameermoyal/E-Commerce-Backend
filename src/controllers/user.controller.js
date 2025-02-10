@@ -49,6 +49,10 @@ export const userLogin=async(req,res,next)=>{
         if(!user){
             return res.status(400).json({message:"Not to be found please sign up"})
         } 
+        if(user.userStatus==false){
+            return res.status(400).json({message:"your accout have block"})
+        } 
+        
 
         const hashPassword=user.password;       
   
