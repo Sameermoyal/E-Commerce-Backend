@@ -19,21 +19,21 @@ const cartSchema = new mongoose.Schema({
         min: 1,
         default: 1,
       },
-    //   price: {
-    //     type: Number,
-    //     required: true,
-    //   },
-    //   total: {
-    //     type: Number,
-    //     required: true,
-    //   },
+      rate: {
+        type: Number,
+        required: true,
+      },
+      total: {
+        type: Number,
+        required: true,
+      },
     },
   ],
-//   totalAmount: {
-//     type: Number,
-//     required: true,
-//     default: 0,
-//   },
+  totalAmount: {
+    type: Number,
+    required: true,
+    default: 0,
+  },
   createdAt: {
     type: Date,
     default: Date.now,
