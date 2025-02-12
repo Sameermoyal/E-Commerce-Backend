@@ -17,14 +17,17 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
+app.use(cookieParser())
+
+const PORT = process.env.PORT || 4000; 
 
 app.use('/api/auth',userAuthRoute)
 app.use('/api/customerProducts',customerRoute)
 app.use('/api/seller',sellerRoute)
 app.use('/api/admin',adminRoute)
 app.use('/api/order',orderRoute)
-app.use(cookieParser())
-app.listen(process.env.PORT,()=>console.log(`server running this port`,process.env.PORT))
+
+app.listen(PORT, "0.0.0.0",()=>console.log(`server running this port`,process.env.PORT))
 connectDB()
 
 
