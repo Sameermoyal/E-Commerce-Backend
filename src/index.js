@@ -8,6 +8,7 @@ import userAuthRoute from "./routes/auth.route.js"
 import customerRoute from "./routes/customer.route.js"
 import sellerRoute from "./routes/seller.route.js"
 import adminRoute from "./routes/admin.route.js"
+import orderRoute from "./routes/order.route.js"
 import fileUpload from "express-fileupload";
 
 
@@ -21,6 +22,7 @@ app.use('/api/auth',userAuthRoute)
 app.use('/api/customerProducts',customerRoute)
 app.use('/api/seller',sellerRoute)
 app.use('/api/admin',adminRoute)
+app.use('/api/order',orderRoute)
 app.use(cookieParser())
 app.listen(process.env.PORT,()=>console.log(`server running this port`,process.env.PORT))
 connectDB()
