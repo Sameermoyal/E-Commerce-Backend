@@ -19,7 +19,7 @@ app.use(express.urlencoded({extended:true}))
 app.use(fileUpload({ useTempFiles: true, tempFileDir: "/tmp/" }));
 app.use(cookieParser())
 
-const PORT = process.env.PORT || 4000; 
+const PORT = process.env.PORT ; 
 
 app.use('/api/auth',userAuthRoute)
 app.use('/api/customerProducts',customerRoute)
@@ -27,7 +27,15 @@ app.use('/api/seller',sellerRoute)
 app.use('/api/admin',adminRoute)
 app.use('/api/order',orderRoute)
 
-app.listen(PORT, "0.0.0.0",()=>console.log(`server running this port`,process.env.PORT))
-connectDB()
+
+  
+  connectDB().then(() => {
+    app.listen(PORT, "0.0.0.0", () => 
+      console.log(`Server running on port ${PORT}`)
+    );
+  }).catch(err => {
+    console.error("Database connection failed:", err);
+  });
+  
 
 
