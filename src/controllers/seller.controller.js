@@ -1,5 +1,6 @@
 import productModel from "../models/product.model.js"
 import cloudinary from "../lib/cloudinary.js";
+import Order from "../models/order.model.js"
 
 export const addProduct = async (req, res) => {
     try {
@@ -84,6 +85,7 @@ export const getOneProduct = async (req, res) => {
 };
 
 
+
 export const updateProduct = async (req, res) => {
     try {
         const { title, rate, desc, category,quantity ,brand,_id} = req.body;
@@ -123,6 +125,29 @@ export const updateProduct = async (req, res) => {
     } catch (error) {
         console.error("Error in getOneProduct:", error);
         return res.status(500).json({ message: "Server error in get OneProduct", error: error.message });
+    }
+};
+export const changeOrderStatus = async (req, res) => {
+    try {
+        console.log("API Call: /changeOrderStatus");
+
+        const {orderId}=req.params;
+        const {status}=req.body;
+
+   console.log("orderID",orderId,"status",status)
+    
+
+  const updatedOrder= await Order.findByIdAndUpdate(orderId,{status:status},{new:true})
+
+  console.log("updatedOrder>>>>>",updatedOrder)
+
+
+    
+   return res.status(201).json({ message: "Order status update  successfully!"});
+
+    } catch (error) {
+        console.error("Error in Order status update:", error);
+        return res.status(500).json({ message: "Server error in Order status update", error: error.message });
     }
 };
 export const deleteProduct = async (req, res) => {

@@ -5,7 +5,7 @@ import Order from "../models/order.model.js"
 
 export const createOrder=async(req,res)=>{
     try {const user=req.user
-              
+               
             const { productId, quantity, address, paymentMode ,itemId,phone} = req.body;
         
             if (!productId || !quantity || !address || !paymentMode || !phone) {
@@ -55,12 +55,15 @@ export const createOrder=async(req,res)=>{
               address,
               paymentMode,
               phone,
+              sellerId:product.sellerId,
             });
         
+  console.log("new order>>>>>>>>>>",newOrder)
+
             await newOrder.save();
           
 
-
+ console.log("order create successfully")
             
         
             res.status(201).json({ message: "Order placed successfully!", order: newOrder });
@@ -91,3 +94,24 @@ export const orderItem=async(req,res)=>{
        return res.status(500).json({message:"Error to previcious Order get successfully",error:error.message})
     }
 }
+
+
+
+export const TrackCustomerOrder = async (req, res) => {
+    try {
+        const {userId}=req.user;
+        console.log("API Call: /TrackCustomerOrder/",userId);
+        
+        
+        const CustomerOrders=await Order.find({sellerId:userId})
+        console.log("Customer Order List",CustomerOrders)
+ 
+
+
+   return res.status(201).json({ message: "Product get One successfully!", userId:userId ,CustomerOrdersList:CustomerOrders});
+
+    } catch (error) {
+        console.error("Error in getAllProduct:", error);
+        return res.status(500).json({ message: "Server error", error: error.message });
+    }
+};
